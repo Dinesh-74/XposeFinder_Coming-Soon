@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Xposefinder | Coming Soon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #7333F7;
+      --primary-hover: #9B5FFF;
+      --bg: #F9FAFB;
+      --card-bg: #FFFFFF;
+      --text: #1F2937;
+      --text-dark: #111827;
+      --accent: #9B5FFF;
+      --glass: rgba(255,255,255,0.8);
+      --glass-blur: blur(8px);
+      --glow: 0 0 16px 2px #7333F722, 0 0 2px 0 #9B5FFF11;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Inter', Arial, sans-serif;
+      background: linear-gradient(120deg, #F9FAFB 60%, #E5E7EB 100%);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+    }
+    .gradient-anim {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      background: linear-gradient(120deg, #7333F70A 0%, #9B5FFF0A 100%);
+      animation: gradientMove 8s ease-in-out infinite alternate;
+      opacity: 0.5;
+    }
+    @keyframes gradientMove {
+      0% { filter: blur(60px) brightness(1.1); }
+      100% { filter: blur(80px) brightness(1.2); }
+    }
+    .mesh-bg {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.13;
+    }
+    .container {
+      background: var(--glass);
+      border-radius: 2.2rem;
+      box-shadow: var(--glow);
+      padding: 3.2rem 2.5rem 2.5rem 2.5rem;
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      border: 1.5px solid #E5E7EB;
+      backdrop-filter: var(--glass-blur);
+      animation: floatCard 3.5s ease-in-out infinite alternate;
+      transition: box-shadow 0.3s, border 0.3s;
+    }
+    @keyframes floatCard {
+      0% { transform: translateY(0px) scale(1); }
+      100% { transform: translateY(-10px) scale(1.01); }
+    }
+    .logo {
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+    .logo svg {
+      height: 3.2rem;
+      width: 3.2rem;
+      display: block;
+      margin: 0 auto;
+      filter: drop-shadow(0 0 16px #7333F755);
+    }
+    .logo-text {
+      font-size: 2.1rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      color: var(--primary);
+      text-shadow: 0 2px 24px #7333F722;
+      font-family: 'Inter', Arial, sans-serif;
+      text-transform: uppercase;
+    }
+    h1 {
+      font-size: 2.3rem;
+      font-weight: 900;
+      margin: 1.2rem 0 0.7rem 0;
+      color: var(--primary);
+      letter-spacing: 0.03em;
+      text-shadow: 0 2px 18px #9B5FFF22;
+    }
+    .main-message {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 1.3rem;
+      color: var(--text-dark);
+      letter-spacing: 0.01em;
+      text-shadow: 0 1px 8px #7333F711;
+    }
+    .support-message {
+      font-size: 1.08rem;
+      color: #4B5563;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+    .bg-anim {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .bg-anim svg {
+      filter: blur(1.5px) brightness(1.05);
+      opacity: 0.7;
+    }
+    .tech-lines {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .bg-anim ellipse {
+      fill: url(#grad1);
+    }
+    .bg-anim .tech-lines polyline {
+      stroke: url(#techline);
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 1.5rem 0.5rem 1.5rem 0.5rem;
+        max-width: 98vw;
+      }
+      h1 { font-size: 1.3rem; }
+      .main-message { font-size: 1rem; }
+      .logo-text { font-size: 1.2rem; }
+      .logo svg { height: 2rem; width: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="gradient-anim"></div>
+  <svg class="mesh-bg" width="100%" height="100%" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+        <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#7333F7" stroke-width="0.7" opacity="0.18"/>
+      </pattern>
+    </defs>
+    <rect width="1440" height="900" fill="url(#grid)" />
+  </svg>
+  <div class="bg-anim">
+    <svg width="100%" height="100%" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;">
+      <defs>
+        <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#7333F7" stop-opacity="0.10"/>
+          <stop offset="100%" stop-color="#9B5FFF" stop-opacity="0.08"/>
+        </linearGradient>
+        <linearGradient id="techline" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#7333F7" stop-opacity="0.4"/>
+          <stop offset="100%" stop-color="#9B5FFF" stop-opacity="0.18"/>
+        </linearGradient>
+      </defs>
+      <ellipse cx="720" cy="400" rx="700" ry="320" />
+      <ellipse cx="300" cy="700" rx="300" ry="120" />
+      <ellipse cx="1200" cy="200" rx="200" ry="80" />
+      <g class="tech-lines">
+        <polyline points="0,100 400,200 800,100 1200,300 1440,200" stroke-width="2" fill="none">
+          <animate attributeName="points" dur="6s" repeatCount="indefinite"
+            values="0,100 400,200 800,100 1200,300 1440,200;
+                    0,120 400,180 800,140 1200,320 1440,180;
+                    0,100 400,200 800,100 1200,300 1440,200" />
+        </polyline>
+        <polyline points="0,800 300,600 700,850 1100,700 1440,850" stroke-width="2" fill="none">
+          <animate attributeName="points" dur="7s" repeatCount="indefinite"
+            values="0,800 300,600 700,850 1100,700 1440,850;
+                    0,820 300,620 700,830 1100,720 1440,830;
+                    0,800 300,600 700,850 1100,700 1440,850" />
+        </polyline>
+      </g>
+    </svg>
+    <!-- Animated particles -->
+    <canvas id="particles-bg" style="position:absolute;top:0;left:0;width:100vw;height:100vh;z-index:1;pointer-events:none;"></canvas>
+  </div>
+  <main class="container">
+    <div class="logo" aria-label="Xposefinder logo">
+      <!-- Lens icon SVG for Xposefinder -->
+      <svg fill="#7333F7" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="48px" height="48px" viewBox="0 0 45.92 45.92" xml:space="preserve" stroke="#7333F7" stroke-width="0.00045923">
+        <g> <path d="M45.494,44.443c-0.004,0.387-0.025,0.611-0.025,0.611l-0.838,0.838c0,0-0.225,0.021-0.612,0.025 c-0.2,0.01-0.43,0.002-0.696-0.01c-0.266-0.013-0.584-0.013-0.898-0.057c-0.65-0.064-1.438-0.146-2.242-0.338 c-0.816-0.18-1.699-0.421-2.582-0.764c-0.891-0.336-1.802-0.752-2.688-1.271c-0.891-0.515-1.764-1.123-2.502-1.917 c-0.748-0.784-1.348-1.77-1.928-2.797c-0.58-1.03-1.177-2.067-1.861-3.019c-0.961-1.329-1.891-2.664-2.787-3.988 c2.266-1.362,4.222-3.184,5.721-5.352c1.252,0.853,2.512,1.731,3.768,2.64c0.951,0.684,1.988,1.28,3.019,1.86 c1.028,0.582,2.012,1.181,2.797,1.928c0.794,0.738,1.401,1.611,1.917,2.502c0.52,0.886,0.936,1.797,1.271,2.688 c0.343,0.883,0.584,1.766,0.764,2.582c0.191,0.805,0.273,1.592,0.338,2.242c0.044,0.314,0.044,0.633,0.057,0.898 C45.496,44.013,45.504,44.24,45.494,44.443z M24.429,29.652c-2.369,1.397-5.122,2.213-8.072,2.213 c-8.8,0-15.933-7.133-15.933-15.933C0.424,7.134,7.558,0,16.357,0s15.932,7.134,15.932,15.933c0,3.369-1.051,6.49-2.836,9.063 C28.139,26.891,26.421,28.478,24.429,29.652z M20.571,23.427c1.032-0.581,1.927-1.371,2.638-2.31 c1.093-1.442,1.749-3.234,1.749-5.183c0-4.75-3.85-8.601-8.6-8.601s-8.601,3.851-8.601,8.601s3.851,8.602,8.601,8.602 C17.889,24.533,19.325,24.129,20.571,23.427z"></path> </g>
+      </svg>
+      <span class="logo-text">Xposefinder</span>
+    </div>
+    <h1>Coming Soon</h1>
+    <div class="main-message">Exposed Data? Find It. Fix It. Fast.</div>
+    <div class="support-message">Something powerful is coming to help you take control of your data exposure like never before.</div>
+  </main>
+  <script>
+    // Corporate-style, subtle cybersecurity-themed animated particles background
+    const canvas = document.getElementById('particles-bg');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      let dpr = window.devicePixelRatio || 1;
+      let width = window.innerWidth;
+      let height = window.innerHeight;
+      let particles = [];
+      const PARTICLE_COUNT = Math.max(16, Math.floor(width / 80));
+      const COLORS = ['#7333F7', '#9B5FFF', '#BFA3FF'];
+      const ICONS = ['circle', 'magnifier', 'shield', 'lock'];
+      function resize() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.scale(dpr, dpr);
+      }
+      function random(min, max) { return Math.random() * (max - min) + min; }
+      function createParticles() {
+        particles = [];
+        for (let i = 0; i < PARTICLE_COUNT; i++) {
+          const icon = ICONS[Math.floor(Math.random() * ICONS.length)];
+          particles.push({
+            x: random(0, width),
+            y: random(0, height),
+            r: random(1.1, 2.1),
+            color: COLORS[Math.floor(Math.random() * COLORS.length)],
+            alpha: random(0.10, 0.18),
+            dx: random(-0.04, 0.04),
+            dy: random(-0.03, 0.03),
+            icon,
+            rot: random(0, Math.PI * 2),
+            rotSpeed: random(-0.004, 0.004)
+          });
+        }
+      }
+      function drawMagnifier(x, y, r, color, alpha, rot) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(rot);
+        ctx.globalAlpha = alpha;
+        ctx.lineWidth = 1.2;
+        ctx.strokeStyle = color;
+        ctx.beginPath();
+        ctx.arc(0, 0, r, 0, 2 * Math.PI);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(r * 0.7, r * 0.7);
+        ctx.lineTo(r * 1.4, r * 1.4);
+        ctx.stroke();
+        ctx.restore();
+        ctx.globalAlpha = 1;
+      }
+      function drawShield(x, y, r, color, alpha, rot) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(rot);
+        ctx.globalAlpha = alpha;
+        ctx.lineWidth = 1.2;
+        ctx.strokeStyle = color;
+        ctx.beginPath();
+        ctx.moveTo(0, -r);
+        ctx.lineTo(r, -r * 0.3);
+        ctx.lineTo(r * 0.7, r * 0.8);
+        ctx.lineTo(0, r);
+        ctx.lineTo(-r * 0.7, r * 0.8);
+        ctx.lineTo(-r, -r * 0.3);
+        ctx.closePath();
+        ctx.stroke();
+        ctx.restore();
+        ctx.globalAlpha = 1;
+      }
+      function drawLock(x, y, r, color, alpha, rot) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(rot);
+        ctx.globalAlpha = alpha;
+        ctx.lineWidth = 1.2;
+        ctx.strokeStyle = color;
+        // Body
+        ctx.beginPath();
+        ctx.rect(-r * 0.7, 0, r * 1.4, r * 1.2);
+        ctx.stroke();
+        // Shackle
+        ctx.beginPath();
+        ctx.arc(0, 0, r * 0.7, Math.PI, 0);
+        ctx.stroke();
+        ctx.restore();
+        ctx.globalAlpha = 1;
+      }
+      function draw() {
+        ctx.clearRect(0, 0, width, height);
+        for (const p of particles) {
+          ctx.shadowColor = p.color;
+          ctx.shadowBlur = 8;
+          if (p.icon === 'circle') {
+            ctx.globalAlpha = p.alpha;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, 2 * Math.PI);
+            ctx.fillStyle = p.color;
+            ctx.fill();
+            ctx.globalAlpha = 1;
+          } else if (p.icon === 'magnifier') {
+            drawMagnifier(p.x, p.y, p.r, p.color, p.alpha, p.rot);
+          } else if (p.icon === 'shield') {
+            drawShield(p.x, p.y, p.r, p.color, p.alpha, p.rot);
+          } else if (p.icon === 'lock') {
+            drawLock(p.x, p.y, p.r, p.color, p.alpha, p.rot);
+          }
+          ctx.shadowBlur = 0;
+        }
+      }
+      function animate() {
+        for (const p of particles) {
+          p.x += p.dx;
+          p.y += p.dy;
+          p.rot += p.rotSpeed;
+          if (p.x < -10) p.x = width + 10;
+          if (p.x > width + 10) p.x = -10;
+          if (p.y < -10) p.y = height + 10;
+          if (p.y > height + 10) p.y = -10;
+        }
+        draw();
+        requestAnimationFrame(animate);
+      }
+      window.addEventListener('resize', () => {
+        resize();
+        createParticles();
+      });
+      resize();
+      createParticles();
+      animate();
+    }
+  </script>
+</body>
+</html> 
